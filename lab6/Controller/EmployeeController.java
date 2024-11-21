@@ -98,9 +98,11 @@ public class EmployeeController {
     public ResponseEntity promoteEmployee(@RequestParam String id,@RequestParam String id2){
         for (Employee e:employees){
             if (e.getID().equals(id) && e.getPosition().equals("supervisor")) {
-                if (e.getID().equals(id2) && e.getAge() >= 30 && !e.isOnLeave()) {
-                    e.setPosition("supervisor");
-                    return ResponseEntity.status(200).body("The employee has been promoted");
+                for(Employee e1:employees){
+                    if (e1.getID().equals(id2) && e.getAge() >= 30 && !e1.isOnLeave()) {
+                        e1.setPosition("supervisor");
+                        return ResponseEntity.status(200).body("The employee has been promoted");
+                    }
                 }
             }
         }
